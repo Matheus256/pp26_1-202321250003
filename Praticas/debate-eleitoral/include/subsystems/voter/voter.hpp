@@ -9,7 +9,7 @@
 class VoterObserver : public Observer {
 private:
     PoliticalCollaborator* political;
-    bool political_speeking;
+    bool politicalSpeeking;
     std::string name;
 
 public:
@@ -19,11 +19,11 @@ public:
         PoliticalCollaborator* political
     )
         : political(political),
-          political_speeking(false),
+          politicalSpeeking(false),
           name(name) {}
 
     void setPoliticalSpeeking(bool state) {
-        political_speeking = state;
+        politicalSpeeking = state;
     }
 
     std::string getName() const {

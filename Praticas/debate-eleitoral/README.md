@@ -1,5 +1,10 @@
 # Projeto Debate Eleitoral
 
+Projeto para criar um sistema para gerenciamento de debate eleitoral.
+
+A UML do sistema pode ser vista em [UML Debate Eleitoral](docs/UML.pdf).
+
+
 ## Como rodar
 
 Primeiro rodo o seguinte comando no seu terminal

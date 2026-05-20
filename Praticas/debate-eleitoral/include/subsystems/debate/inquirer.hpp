@@ -21,9 +21,6 @@ public:
         : PoliticalCollaborator(political) {}
 
 
-    // Método adicional
-    void select_Inquirer(PoliticalCollaborator political);
-
     void setMicrofone(Microfone* micro) {
         microfe = micro;
     }

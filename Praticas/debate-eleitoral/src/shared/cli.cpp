@@ -66,12 +66,6 @@ void CLI::executarComando(const std::vector<std::string>& args)
         std::cout << "  Configurações de cronometro definidas com sucesso." << std::endl;
     }
 
-    // List system logs
-    else if (args[0] == "logs" && args.size() >= 2 && args[1] == "list") {
-
-        std::cout << "Lista de logs..." << std::endl;
-    }
-
     // Draw inquirer
     else if (args[0] == "sortear" && args.size() >= 2 && args[1] == "inquiridor") {
         std::string result = facade.drawnInquirer();
@@ -97,7 +91,6 @@ void CLI::executarComando(const std::vector<std::string>& args)
         std::cout << "      * criar politico <nome> <partido>" << std::endl;
         std::cout << "      * criar eleitor <nome> <nome-politico> <partido-politico>" << std::endl;
         std::cout << "      * configurar tempos <pergunta> <resposta> <replica> <treplica>" << std::endl;
-        std::cout << "      * logs lits " << std::endl;
         std::cout << "      * sortear inquiridor " << std::endl;
         std::cout << "      * escolher inquirido <nome-politico> <partido-politico> " << std::endl;
         std::cout << "      * iniciar debate " << std::endl;
