@@ -7,3 +7,7 @@ void InquirerCollaborator::speak(float time) {
     microfe->waitTime(time);
     microfe->deactivate();
 }
+
+InquirerCollaborator* InquirerCollaborator::clone() const {
+    return new InquirerCollaborator(this); 
+}
