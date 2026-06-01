@@ -30,4 +30,6 @@ public:
     }
 
     void speak(float time);
+
+    ResponderCollaborator* clone() const override;
 };

@@ -6,3 +6,7 @@ void ResponderCollaborator::speak(float time) {
     microfe->waitTime(time);
     microfe->deactivate();
 }
+
+ResponderCollaborator* ResponderCollaborator::clone() const {
+    return new ResponderCollaborator(this); 
+}
