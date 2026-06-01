@@ -12,10 +12,13 @@ void DebateMediator::setInquisitor(const PoliticalCollaborator* political)
         delete inquisitor;
     }
 
-    Microfone* micro = new Microfone();
+    PoliticalCollaborator* politicalCopy = political->clone();
+    inquisitor = new InquirerCollaborator(politicalCopy);
 
-    inquisitor = new InquirerCollaborator(political);
-    inquisitor->setMicrofone(micro);
+    // Deleta copia temporária
+    delete politicalCopy;
+
+    inquisitor->setMicrofone(new Microfone());
 }
 
 void DebateMediator::setResponder(const PoliticalCollaborator* political)
@@ -26,10 +29,13 @@ void DebateMediator::setResponder(const PoliticalCollaborator* political)
         delete responder;
     }
 
-    Microfone* micro = new Microfone();
+    PoliticalCollaborator* politicalCopy = political->clone();
+    responder = new ResponderCollaborator(politicalCopy);
+    
+    // Deleta copia temporária
+    delete politicalCopy;
 
-    responder = new ResponderCollaborator(political);
-    responder->setMicrofone(micro);
+    responder->setMicrofone(new Microfone());
 }
 
 void DebateMediator::debate(const TimeSettings* timeSettings) {
