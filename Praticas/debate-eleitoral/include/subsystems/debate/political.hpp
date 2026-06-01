@@ -3,11 +3,12 @@
 #include <string>
 
 #include "shared/microfone.hpp"
+#include "shared/prototype.hpp"
 #include "subsystems/debate/mediator.hpp"
 #include "subsystems/voter/publisher.hpp"
 
 
-class PoliticalCollaborator : public Publisher {
+class PoliticalCollaborator : public Publisher, public Prototype {
 
 private:
     std::string name;
@@ -60,5 +61,7 @@ public:
     }
 
     bool getMicrofoneStatus() const;
+
+    PoliticalCollaborator* clone() const override;
 
 };
