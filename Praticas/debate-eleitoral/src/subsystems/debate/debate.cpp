@@ -3,6 +3,9 @@
 #include "shared/logger.hpp"
 #include "shared/settings.hpp"
 #include "subsystems/debate/debate.hpp"
+#include "subsystems/mannager/inquirer_builder.hpp"
+#include "subsystems/mannager/responder_builder.hpp"
+
 
 void DebateMediator::setInquisitor(const PoliticalCollaborator* political)
 {
@@ -12,13 +15,9 @@ void DebateMediator::setInquisitor(const PoliticalCollaborator* political)
         delete inquisitor;
     }
 
-    PoliticalCollaborator* politicalCopy = political->clone();
-    inquisitor = new InquirerCollaborator(politicalCopy);
-
-    // Deleta copia temporária
-    delete politicalCopy;
-
-    inquisitor->setMicrofone(new Microfone());
+    inquisitor = InquirerBuilder(political)
+                    .createMicrofone()
+                    ->createCollaborator();
 }
 
 void DebateMediator::setResponder(const PoliticalCollaborator* political)
@@ -29,13 +28,9 @@ void DebateMediator::setResponder(const PoliticalCollaborator* political)
         delete responder;
     }
 
-    PoliticalCollaborator* politicalCopy = political->clone();
-    responder = new ResponderCollaborator(politicalCopy);
-    
-    // Deleta copia temporária
-    delete politicalCopy;
-
-    responder->setMicrofone(new Microfone());
+    responder = ResponderBuilder(political)
+                    .createMicrofone()
+                    ->createCollaborator();
 }
 
 void DebateMediator::debate(const TimeSettings* timeSettings) {
