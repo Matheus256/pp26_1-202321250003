@@ -81,7 +81,7 @@ void CLI::executarComando(const std::vector<std::string>& args)
     // Start debate session
     else if(args[0] == "iniciar" && args.size() >= 2 && args[1] == "debate") {
         facade.startDebate();
-        std::cout << "  Realiza as definições do proximo debate." << std::endl;
+        std::cout << "  Realize as definições do proximo debate." << std::endl;
     }
 
     // Help

@@ -3,6 +3,9 @@
 #include "shared/logger.hpp"
 #include "shared/settings.hpp"
 #include "subsystems/debate/debate.hpp"
+#include "subsystems/mannager/inquirer_builder.hpp"
+#include "subsystems/mannager/responder_builder.hpp"
+
 
 void DebateMediator::setInquisitor(const PoliticalCollaborator* political)
 {
@@ -12,10 +15,9 @@ void DebateMediator::setInquisitor(const PoliticalCollaborator* political)
         delete inquisitor;
     }
 
-    Microfone* micro = new Microfone();
-
-    inquisitor = new InquirerCollaborator(political);
-    inquisitor->setMicrofone(micro);
+    inquisitor = InquirerBuilder(political)
+                    .createMicrofone()
+                    ->createCollaborator();
 }
 
 void DebateMediator::setResponder(const PoliticalCollaborator* political)
@@ -26,10 +28,9 @@ void DebateMediator::setResponder(const PoliticalCollaborator* political)
         delete responder;
     }
 
-    Microfone* micro = new Microfone();
-
-    responder = new ResponderCollaborator(political);
-    responder->setMicrofone(micro);
+    responder = ResponderBuilder(political)
+                    .createMicrofone()
+                    ->createCollaborator();
 }
 
 void DebateMediator::debate(const TimeSettings* timeSettings) {
