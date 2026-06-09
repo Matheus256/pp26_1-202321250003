@@ -1,6 +1,6 @@
 *database
 external/*
-build/*
+/build/programa
 
 *exe
 *log
