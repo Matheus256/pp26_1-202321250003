@@ -7,6 +7,7 @@
 #include "shared/logger.hpp"
 #include "shared/settings.hpp"
 #include "subsystems/debate/debate.hpp"
+#include "subsystems/debate/flow_state.hpp"
 #include "subsystems/debate/political.hpp"
 #include "subsystems/mannager/political.hpp"
 #include "subsystems/voter/voter.hpp"
@@ -28,7 +29,9 @@ void Facade::init()
     // Inicializar instâncias necessárias
     timeSettings = std::make_unique<TimeSettings>();
     politicalManager = std::make_unique<PoliticalManager>();
-    debateMediator = std::make_unique<DebateMediator>();
+    //debateMediator = std::make_unique<DebateMediator>();
+    debateMediator = new DebateMediator();
+    debateMediator->setState(new DebateFlowState(debateMediator));
 
     Logger::getInstance().info("Fachada iniciada");
 }
@@ -43,14 +46,15 @@ TimeSettings& Facade::getTimeSettings()
     return *timeSettings;
 }
 
-void Facade::defineTimeSettings(float question, float answer, float reply, float counterReply)
+void Facade::defineTimeSettings(float question, float answer, float reply, float counterReply, float replyRight)
 {
     try {
         timeSettings->setQuestion(question);
         timeSettings->setAnswer(answer);
         timeSettings->setReply(reply);
         timeSettings->setCounterReply(counterReply);
-        std::string log_mensagem = std::format("Define os tempos: Pergunta -> {}, Resposta -> {}, Replica -> {}, Treplica -> {}", question, answer, reply, counterReply);
+        timeSettings->setReplyRight(replyRight);
+        std::string log_mensagem = std::format("Define os tempos: Pergunta -> {}, Resposta -> {}, Replica -> {}, Treplica -> {}, Direito de Repostas -> ", question, answer, reply, counterReply, replyRight);
         Logger::getInstance().info(log_mensagem);
     } catch (...) {
         
@@ -62,6 +66,7 @@ void Facade::defineTimeSettings(float question, float answer, float reply, float
 void Facade::createPolitical(std::string name, std::string party){
     try {
         PoliticalCollaborator* political = new PoliticalCollaborator(name, party);
+        political->setMediator(debateMediator);
         politicalManager->createPolitical(political);
         std::string log_mensagem = std::format("Politico {} do partido {} adicionado", name, party);
         Logger::getInstance().info(log_mensagem);
@@ -133,9 +138,26 @@ void Facade::startDebate(){
 
         std::cout << "  Debate encerrado" << std::endl;
         Logger::getInstance().info("Debate encerrado");
+        politicalManager->drawRequestReplyRight();
     } catch (...) {
         std::cout << "Erro no decorrer do debate" << std::endl;
         Logger::getInstance().error("Erro no decorrer do debate");
+    }
+
+}
+
+void Facade::startReplyRight(){
+    try {
+        std::cout << "  Direito de Resposta iniciado!" << std::endl;
+        Logger::getInstance().info("Direito de Resposta iniciado");
+
+        debateMediator->debate(timeSettings.get());
+
+        std::cout << "  Direito de Resposta encerrado" << std::endl;
+        Logger::getInstance().info("Direito de Resposta encerrado");
+    } catch (...) {
+        std::cout << "Erro no decorrer do direiro de resposta" << std::endl;
+        Logger::getInstance().error("Erro no decorrer do direiro de resposta");
     }
 
 }
