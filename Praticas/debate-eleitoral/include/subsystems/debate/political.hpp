@@ -31,6 +31,7 @@ public:
     )
         : Publisher(*other),
           name(other->name),
+          party(other->party),
           mediator(other->mediator),
           drawn(other->drawn) {}
 
@@ -43,7 +44,10 @@ public:
         drawn = value;
     }
 
-    
+    Mediator* getMediator() const{
+        return mediator;
+    }
+
     void setMediator(Mediator* m) {
         mediator = m;
     }

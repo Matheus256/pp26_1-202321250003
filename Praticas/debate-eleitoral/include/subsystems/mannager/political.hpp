@@ -23,4 +23,6 @@ public:
 
     // Sorteia político
     PoliticalCollaborator* drawnPolitical();
+
+    void drawRequestReplyRight() const;
 };

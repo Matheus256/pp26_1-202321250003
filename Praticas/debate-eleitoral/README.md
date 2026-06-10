@@ -7,7 +7,7 @@ A UML do sistema pode ser vista em [UML Debate Eleitoral](docs/UML.pdf).
 
 ## Como rodar
 
-Primeiro rodo o seguinte comando no seu terminal
+Primeiro rodo o seguinte comando no seu terminal, caso não exista, crie antes um diretório `build/` na raiz do projeto `debate-eleitoral`, e depois: 
 
 ```bash
 make app

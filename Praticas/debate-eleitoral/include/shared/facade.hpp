@@ -13,7 +13,8 @@ private:
 
     std::unique_ptr<TimeSettings> timeSettings;
     std::unique_ptr<PoliticalManager> politicalManager;
-    std::unique_ptr<DebateMediator> debateMediator;
+    //std::unique_ptr<DebateMediator> debateMediator;
+    DebateMediator* debateMediator;
 
     // Construtor privado (Singleton)
     Facade() = default;
@@ -32,10 +33,11 @@ public:
     TimeSettings& getTimeSettings();
 
     // Métodos principais
-    void defineTimeSettings(float question, float answer, float reply, float counterReply);
+    void defineTimeSettings(float question, float answer, float reply, float counterReply, float ReplyRight);
     void createPolitical(const std::string name, const std::string party);
     void createVoter(const std::string name, const std::string politicalName, const std::string politicalParty);
     std::string drawnInquirer();
     std::string chooseResponder(const std::string name, const std::string party);
     void startDebate();
+    void startReplyRight();
 };

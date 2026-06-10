@@ -6,6 +6,7 @@ private:
     float answer;
     float reply;
     float counterReply;
+    float replyRight;
 
 public:
     // Construtor padrão
@@ -13,7 +14,8 @@ public:
         : question(0.0f),
           answer(0.0f),
           reply(0.0f),
-          counterReply(0.0f) {}
+          counterReply(0.0f),
+          replyRight(0.0f) {}
 
     // GETTERS
 
@@ -33,6 +35,10 @@ public:
         return counterReply;
     }
 
+    float getReplyRight() const {
+        return replyRight;
+    }
+
     // SETTERS
 
     void setQuestion(float value) {
@@ -49,5 +55,9 @@ public:
 
     void setCounterReply(float value) {
         counterReply = value;
+    }
+
+    void setReplyRight(float value) {
+        replyRight = value;
     }
 };
